@@ -6,6 +6,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../api_constants.dart';
+import '../../../get_it_initializer.dart';
 import '../../../network/api_service.dart';
 import '../../../network/dio_factory.dart';
 import '../models/do_multitransction_model.dart';
@@ -15,7 +16,7 @@ import '../models/execute_procedure_model.dart';
 import '../models/md_request_model.dart';
 import '../models/md_response_model.dart';
 import '../models/upload_flie_model.dart';
-
+import '../models/wanted_action.dart';
 
 class MDRepo {
   final ApiService _apiService;
@@ -24,12 +25,12 @@ class MDRepo {
 
   executeProcedure(
       {required String procedureName,
-      String ?dataToken ,
+      String? dataToken,
       List<dynamic> columnValues = const []}) async {
     try {
       String data = await ExecuteProcedureModel(
         procedureName: procedureName,
-        dataToken: dataToken??ApiConstants.dataToken,
+        dataToken: dataToken ?? MD<ApiConstants>().dataToken,
         columnValues: columnValues,
       ).toMap();
       MDRequest model = MDRequest(
@@ -46,14 +47,14 @@ class MDRepo {
 
   doTransaction(
       {required String tableName,
-      String ?dataToken,
+      String? dataToken,
       required List<dynamic> columnValues,
       required WantedAction action,
       List<String> columnsNames = const []}) async {
     try {
       var data = await DoTransactionModel(
         tableName: tableName,
-        dataToken: dataToken ?? ApiConstants.dataToken,
+        dataToken: dataToken ?? MD<ApiConstants>().dataToken,
         columnValues: columnValues,
         columnsNames: columnsNames,
         action: action,
@@ -106,7 +107,7 @@ class MDRepo {
       String fileID = "",
       String description = "",
       String name = "",
-      String? dataToken }) async {
+      String? dataToken}) async {
     try {
       final bytes = await FlutterImageCompress.compressWithFile(
         image.path,
@@ -135,13 +136,11 @@ class MDRepo {
     }
   }
 
-  downloadFile(
-      {required String fileId,
-      String? dataToken }) async {
+  downloadFile({required String fileId, String? dataToken}) async {
     try {
       var data = await DownloadFileModel(
         fileId: fileId,
-        dataToken: dataToken??ApiConstants.dataToken,
+        dataToken: dataToken ?? MD<ApiConstants>().dataToken,
       ).toMap();
       MDRequest model = MDRequest(
         data: data.toString(),

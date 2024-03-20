@@ -1,7 +1,7 @@
 import 'package:md/src/api_constants.dart';
 import 'package:md/src/get_it_initializer.dart';
 
-class MDInitializer {
+class MDInit {
   static void initialize(
       {required String apiToken,
       required String dataToken,

@@ -4,11 +4,10 @@ import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart' as m;
 
 import '../api_constants.dart';
+import '../get_it_initializer.dart';
 
-
-Future<String> encrypt(
-    {required String str, String? key }) async {
-  key = key ?? ApiConstants.encryptKey;
+Future<String> encrypt({required String str, String? key}) async {
+  key = key ?? MD<ApiConstants>().encryptKey;
   try {
     m.debugPrint("str: $str");
     m.debugPrint("key: $key");
@@ -48,8 +47,8 @@ Future<String> encrypt(
   // }catch
 }
 
-decrypt({String? key, required String str}) async{
-  key = key ?? ApiConstants.encryptKey;
+decrypt({String? key, required String str}) async {
+  key = key ?? MD<ApiConstants>().encryptKey;
   try {
     m.debugPrint("str: $str");
     m.debugPrint("key: $key");

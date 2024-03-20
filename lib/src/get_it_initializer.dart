@@ -7,20 +7,18 @@ import 'package:get_it/get_it.dart';
 
 class GetItInitializer {
   static final _getIt = GetIt.instance;
-  static void init( ) {
+  static void init() {
     Dio dio = DioFactory.getDio();
     _getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
     _getIt.registerLazySingleton<MDRepo>(() => MDRepo(_getIt()));
-    _getIt.registerLazySingleton<ApiConstants>(() => ApiConstants() );
-
+    _getIt.registerLazySingleton<ApiConstants>(() => ApiConstants());
   }
+
   static T get<T>() {
     return _getIt<T>();
   }
-
-
 }
 
-T get<T>() {
+T MD<T>() {
   return GetItInitializer.get<T>();
 }

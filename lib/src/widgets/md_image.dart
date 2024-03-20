@@ -61,8 +61,7 @@ class _MDImageState extends State<MDImage> {
       });
     } else {
       try {
-        file = await get<MDRepo>()
-            .downloadFile(fileId: widget.fileId);
+        file = await MD<MDRepo>().downloadFile(fileId: widget.fileId);
         setState(() {
           isExist = true;
           isLoading = false;

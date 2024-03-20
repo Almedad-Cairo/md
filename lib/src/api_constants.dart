@@ -1,9 +1,22 @@
 class ApiConstants {
-   static  late final String apiToken ;
-      // "TTRreifoi&kah@hd\$ghrd24";
-  static late  final String dataToken ;
-      // "Tasks";
-  static late String encryptKey ;
+  ApiConstants();
+
+  initialize(
+      {required String apiToken,
+      required String dataToken,
+      required String encryptKey}) {
+    apiToken = apiToken;
+    dataToken = dataToken;
+    encryptKey = encryptKey;
+  }
+
+  // get one instance of the class
+
+  late final String apiToken;
+  // "TTRreifoi&kah@hd\$ghrd24";
+  late final String dataToken;
+  // "Tasks";
+  late String encryptKey;
   // = "RH@P\$%ss1966\$@ss";
   static const String fcmServerKey =
       "AAAAkzwIpuU:APA91bHVV5-_7ELs_t2DWxwajkCugP5j1_VlaXN8bWgHml4tPO5AMQEhF08uG-hRy3WcAYHywHETACY_V_cphZU9JKp8HoWny98COnh0kDndNXrcmFsR0vYMlRk78FrkBjbXo22MeAY5";
@@ -30,11 +43,6 @@ class ApiConstants {
   static const String addMissionProject = "U0VGoumERDWs/pl4CDUcDg==";
   static const String addEmployeeProject =
       "ZwITIRFZDKjIMMUtBsaVaCYQwoqThTWmH4tEbSfpr/U=";
-   initialize({required String apiToken,required String dataToken, required String encryptKey}) {
-     ApiConstants.apiToken = apiToken;
-     ApiConstants.dataToken = dataToken;
-     ApiConstants.encryptKey = encryptKey;
-   }
 
   ///Procedures
   static const String loginUser = "9EKz+ckfFzCAT1iZ0GFG/A==";
@@ -53,7 +61,3 @@ class ApiConstants {
   static const String getAllEmployess = "FMK9APDItfWWF603Y31vSw==";
   static const String getEmployeeData = "c7xYM5+2uXMZApC9e1wV3A==";
 }
-
-
-
-

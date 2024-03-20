@@ -3,13 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
 import '../../encryption.dart';
-import 'do_transction_model.dart';
-
-
-
+import 'wanted_action.dart';
 
 class DoMultiTransactionModel {
-  late final String  dataToken;
+  late final String dataToken;
   late final List<List<dynamic>> columnsValues;
   late final List<String> tableNames;
 
@@ -22,21 +19,19 @@ class DoMultiTransactionModel {
     required this.action,
   });
 
-  toMap() async{
-
-    var d=columnsValues.map((e) => e.join('#')).toList();
-    String columnValues=d.join('^');
+  toMap() async {
+    var d = columnsValues.map((e) => e.join('#')).toList();
+    String columnValues = d.join('^');
     debugPrint('columnValues: $columnValues');
 
-
-    String data= await encrypt(
+    String data = await encrypt(
         str: jsonEncode({
-          'MultiTableName': tableNames.join('^'),
-          'MultiColumnsValues': columnValues,
-          'WantedAction': action.index,
-          "PointId": "0",
-          'DataToken': dataToken,
-        }));
+      'MultiTableName': tableNames.join('^'),
+      'MultiColumnsValues': columnValues,
+      'WantedAction': action.index,
+      "PointId": "0",
+      'DataToken': dataToken,
+    }));
     return data;
   }
 }
