@@ -1,5 +1,5 @@
-import 'package:md/src/api_constants.dart';
-import 'package:md/src/get_it_initializer.dart';
+import 'package:md_framework/src/api_constants.dart';
+import 'package:md_framework/src/get_it_initializer.dart';
 
 class MDInit {
   static void initialize(

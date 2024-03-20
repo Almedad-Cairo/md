@@ -1,6 +1,6 @@
     
   # Project Title
-  MDFramework SDK
+  MDFramework SDK V0.0.2
   ## Description
     This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework.
   ## Table of Contents

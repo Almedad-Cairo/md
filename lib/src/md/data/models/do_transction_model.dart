@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:md/src/md/data/models/wanted_action.dart';
+import 'package:md_framework/src/md/data/models/wanted_action.dart';
 
 import '../../encryption.dart';
 

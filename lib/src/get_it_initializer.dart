@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:md/src/api_constants.dart';
-import 'package:md/src/md/data/repo/md_repo.dart';
-import 'package:md/src/network/api_service.dart';
-import 'package:md/src/network/dio_factory.dart';
+import 'package:md_framework/src/api_constants.dart';
+import 'package:md_framework/src/md/data/repo/md_repo.dart';
+import 'package:md_framework/src/network/api_service.dart';
+import 'package:md_framework/src/network/dio_factory.dart';
 import 'package:get_it/get_it.dart';
 
 class GetItInitializer {

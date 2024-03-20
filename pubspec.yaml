@@ -1,5 +1,5 @@
-name: md
-description: "A new Flutter package project."
+name: md_framework
+description: "This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework."
 version: 0.0.2 
 homepage: https://github.com/Almedad-Cairo/md.git
 
