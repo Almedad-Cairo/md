@@ -14,8 +14,8 @@ class GetItInitializer {
     _getIt.registerLazySingleton<ApiConstants>(() => ApiConstants());
   }
 
-  static T get<T>() {
-    return _getIt<T>();
+  static T get<T extends Object>() {
+    return _getIt<T >();
   }
 }
 
