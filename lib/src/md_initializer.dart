@@ -12,6 +12,6 @@ class MDInit {
   }
 }
 
-T MD<T>() {
+T MD<T extends Object>() {
   return GetItInitializer.get<T>();
 }
