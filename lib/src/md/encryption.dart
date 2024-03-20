@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart' as m;
 
+import '../../md.dart';
 import '../api_constants.dart';
-import '../get_it_initializer.dart';
 
 Future<String> encrypt({required String str, String? key}) async {
   key = key ?? MD<ApiConstants>().encryptKey;

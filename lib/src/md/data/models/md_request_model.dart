@@ -1,5 +1,5 @@
+import '../../../../md.dart';
 import '../../../api_constants.dart';
-import '../../../get_it_initializer.dart';
 
 class MDRequest {
   late String data;

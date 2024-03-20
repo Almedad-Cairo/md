@@ -10,7 +10,7 @@ class GetItInitializer {
   static void init() {
     Dio dio = DioFactory.getDio();
     _getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
-    _getIt.registerLazySingleton<MDRepo>(() => MDRepo(_getIt()));
+    _getIt.registerLazySingleton<MDRepo>(() => MDRepo.a(_getIt()));
     _getIt.registerLazySingleton<ApiConstants>(() => ApiConstants());
   }
 
@@ -19,6 +19,4 @@ class GetItInitializer {
   }
 }
 
-T MD<T>() {
-  return GetItInitializer.get<T>();
-}
+

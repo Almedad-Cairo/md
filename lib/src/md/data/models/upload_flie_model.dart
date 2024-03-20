@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:md/src/md/data/models/wanted_action.dart';
 
+import '../../../../md.dart';
 import '../../../api_constants.dart';
-import '../../../get_it_initializer.dart';
 import '../../encryption.dart';
 
 class UploadFileModel {

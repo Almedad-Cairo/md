@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../md.dart';
 import '../../../api_constants.dart';
-import '../../../get_it_initializer.dart';
 import '../../../network/api_service.dart';
 import '../../../network/dio_factory.dart';
 import '../models/do_multitransction_model.dart';
@@ -14,14 +14,15 @@ import '../models/do_transction_model.dart';
 import '../models/download_file_model.dart';
 import '../models/execute_procedure_model.dart';
 import '../models/md_request_model.dart';
-import '../models/md_response_model.dart';
 import '../models/upload_flie_model.dart';
-import '../models/wanted_action.dart';
 
 class MDRepo {
   final ApiService _apiService;
 
-  MDRepo(this._apiService);
+  MDRepo.a(this._apiService);
+  factory MDRepo() {
+    return MD<MDRepo>();
+  }
 
   executeProcedure(
       {required String procedureName,

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import '../../../../md.dart';
 import '../../../api_constants.dart';
-import '../../../get_it_initializer.dart';
 import '../../encryption.dart';
 
 class DownloadFileModel {

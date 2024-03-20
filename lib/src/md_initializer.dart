@@ -11,3 +11,7 @@ class MDInit {
         apiToken: apiToken, dataToken: dataToken, encryptKey: encryptKey);
   }
 }
+
+T MD<T>() {
+  return GetItInitializer.get<T>();
+}

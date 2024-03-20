@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:md/src/get_it_initializer.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../md/data/repo/md_repo.dart';
+import '../../md.dart';
 
 class MDImage extends StatefulWidget {
   final String fileId;
