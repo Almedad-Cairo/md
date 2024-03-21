@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../md.dart';
+import '../../../../md_framework.dart';
 import '../../../api_constants.dart';
 import '../../../network/api_service.dart';
 import '../../../network/dio_factory.dart';

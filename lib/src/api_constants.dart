@@ -5,18 +5,21 @@ class ApiConstants {
       {required String apiToken,
       required String dataToken,
       required String encryptKey}) {
-    apiToken = apiToken;
-    dataToken = dataToken;
-    encryptKey = encryptKey;
+    this.apiToken = apiToken;
+    this.dataToken = dataToken;
+    this.encryptKey = encryptKey;
   }
 
   // get one instance of the class
 
   late final String apiToken;
+
   // "TTRreifoi&kah@hd\$ghrd24";
   late final String dataToken;
+
   // "Tasks";
   late String encryptKey;
+
   // = "RH@P\$%ss1966\$@ss";
   static const String fcmServerKey =
       "AAAAkzwIpuU:APA91bHVV5-_7ELs_t2DWxwajkCugP5j1_VlaXN8bWgHml4tPO5AMQEhF08uG-hRy3WcAYHywHETACY_V_cphZU9JKp8HoWny98COnh0kDndNXrcmFsR0vYMlRk78FrkBjbXo22MeAY5";

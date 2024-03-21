@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../md.dart';
+import '../../md_framework.dart';
 
 class MDImage extends StatefulWidget {
   final String fileId;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../../../md.dart';
+import '../../../../md_framework.dart';
 import '../../../api_constants.dart';
 import '../../encryption.dart';
 

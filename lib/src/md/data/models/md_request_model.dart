@@ -1,4 +1,4 @@
-import '../../../../md.dart';
+import '../../../../md_framework.dart';
 import '../../../api_constants.dart';
 
 class MDRequest {
