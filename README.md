@@ -6,13 +6,13 @@
   ## Usage 
 # in Main.dart add this code
 <?code-excerpt "readme_excerpts.dart (Example)"?>
-```dart
+    ```dart
      MDInit.initialize(
                   apiToken: YourApiToken,
                   dataToken: YourDataToken,
                     encryptKey: YourEncryptKey,
                   );
-                ```
+    ```
 
 
 
