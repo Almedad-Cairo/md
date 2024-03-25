@@ -10,13 +10,17 @@ class GetItInitializer {
   static void init() {
     Dio dio = DioFactory.getDio();
     _getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
-    _getIt.registerLazySingleton<MDRepo>(() => MDRepo.a(_getIt()));
+    _getIt.registerLazySingleton<MDRepo>(() => MDRepo.a(_getIt()),instanceName: 'md_repo');
     _getIt.registerLazySingleton<ApiConstants>(() => ApiConstants());
   }
 
-  static T get<T extends Object>() {
-    return _getIt<T >();
+  static T get<T extends Object>({String instanceName = ''}) {
+   if(instanceName.isNotEmpty){
+     return _getIt<T>(instanceName: instanceName);
+   }
+    return _getIt<T>();
   }
+
 }
 
 

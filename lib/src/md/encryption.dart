@@ -48,9 +48,10 @@ Future<String> encrypt({required String str, String? key}) async {
 }
 
 decrypt({String? key, required String str}) async {
+  String encrypted = str.replaceAll("\\r\\n", "");
   key = key ?? MD<ApiConstants>().encryptKey;
   try {
-    m.debugPrint("str: $str");
+    m.debugPrint("str: $encrypted");
     m.debugPrint("key: $key");
     List<int> key0 = [];
     key0.addAll(ascii.encode(key).toList());
@@ -79,7 +80,7 @@ decrypt({String? key, required String str}) async {
         padding: "PKCS7",
       ),
     );
-    final decrypted = encrypter.decrypt(Encrypted.from64(str),
+    final decrypted = encrypter.decrypt(Encrypted.from64(encrypted),
         iv: IV(Uint8List.fromList(iv)));
     m.debugPrint("decrypted: $decrypted");
     return decrypted;

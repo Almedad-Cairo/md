@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:get_it/get_it.dart';
+import 'package:md_framework/src/network/api_error_handler.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../../md_framework.dart';
@@ -20,8 +23,10 @@ class MDRepo {
   final ApiService _apiService;
 
   MDRepo.a(this._apiService);
+
   factory MDRepo() {
-    return MD<MDRepo>();
+    GetIt getIt = GetIt.instance;
+    return getIt.get<MDRepo>(instanceName: 'md_repo');
   }
 
   executeProcedure(
@@ -41,6 +46,8 @@ class MDRepo {
       MDResponse resEncrypted = await _apiService.executeProcedure(model);
       MDResponse res = await resEncrypted.decryptData();
       return res;
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
     } catch (e) {
       rethrow;
     }
@@ -93,6 +100,8 @@ class MDRepo {
       MDResponse resEncrypted = await _apiService.doMultiTransaction(model);
       MDResponse res = await resEncrypted.decryptData();
       return res;
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
     } catch (e) {
       rethrow;
     }
@@ -132,6 +141,8 @@ class MDRepo {
       MDResponse resEncrypted = await _apiService.uploadFile(model);
       MDResponse res = await resEncrypted.decryptData();
       return res;
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
     } catch (e) {
       rethrow;
     }
@@ -164,6 +175,8 @@ class MDRepo {
       file.writeAsBytesSync(
           base64Decode(res.file64!.replaceAll(RegExp(r'\s+'), '')));
       return file;
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
     } catch (e) {
       debugPrint('e: $e');
       return false;

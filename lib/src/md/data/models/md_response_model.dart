@@ -22,6 +22,14 @@ class MDResponse {
   String? fileExtension;
 
   MDResponse();
+  MDResponse.a(
+      {required this.status,
+      required this.message,
+      this.data,
+      this.fileID,
+      this.fileName,
+      this.file64,
+      this.fileExtension});
 
   factory MDResponse.fromJson(Map<String, dynamic> json) =>
       _$MDResponseFromJson(json);
