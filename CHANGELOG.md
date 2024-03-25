@@ -7,6 +7,12 @@
 # (Version 0.0.3)
 - Fixed a bug in the MDFramework SDK.
 
+## 0.0.4
+# (Version 0.0.4)
+- Added Api Error handling in the MDFramework SDK.
+- Fixed a bug in the MDFramework SDK.
+- Fix issue in decryption .
+
 
 
 
