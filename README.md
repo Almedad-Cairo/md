@@ -6,19 +6,19 @@
   ## Usage 
 # in Main.dart add this code
 <?code-excerpt "readme_excerpts.dart (Example)"?>
- 
+  ```dart
      MDInit.initialize(
-                  apiToken: YourApiToken,
-                  dataToken: YourDataToken,
-                    encryptKey: YourEncryptKey,
-                  );
+      apiToken: YourApiToken,
+      dataToken: YourDataToken,
+      encryptKey: YourEncryptKey,
+      );
+    ```
 
 
 
 
 
-  ## Usage
- ```dart
+```dart
     res = await MDRepo().executeProcedure(
           procedureName: ApiConstants.loginProcedure,
           dataToken: ApiConstants.dataToken,
