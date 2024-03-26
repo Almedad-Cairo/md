@@ -63,11 +63,8 @@ action: WantedAction.insert);
 ],
 dataToken: ApiConstants.dataToken,
 columnValues: [
-[
-//List of column values for table1
-],
-[//List of column values for table2
-],
+["List of column values for table1" ],
+["List of column values for table2"],
 ],
 action: WantedAction.insert,
 );

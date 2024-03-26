@@ -15,6 +15,9 @@
 ## 0.0.4+1
 # (Version 0.0.4+1)
 - update readme file
+## 0.0.5
+# (Version 0.0.5)
+- Add Documentation
 
 
 
