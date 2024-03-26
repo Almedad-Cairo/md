@@ -6,20 +6,21 @@
   ## Usage 
 # in Main.dart add this code
 <?code-excerpt "readme_excerpts.dart (Example)"?>
-  ```dart
+   ```dart
      MDInit.initialize(
       apiToken: YourApiToken,
       dataToken: YourDataToken,
       encryptKey: YourEncryptKey,
       );
-    ```
+   ```
 
 
 
+# in your api class add this code
 
 
 ```dart
-    res = await MDRepo().executeProcedure(
+      res = await MDRepo().executeProcedure(
           procedureName: ApiConstants.loginProcedure,
           dataToken: ApiConstants.dataToken,
           columnValues: [emailController.text, passwordController.text]);
