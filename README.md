@@ -1,18 +1,17 @@
     
-  # Project Title
-  MDFramework SDK V0.0.2
+  # MDFramework SDK 
   ## Description
-    This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework.
+  -  This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework.
   ## Usage 
 # in Main.dart add this code
 <?code-excerpt "readme_excerpts.dart (Example)"?>
-   ```dart
-     MDInit.initialize(
-      apiToken: YourApiToken,
-      dataToken: YourDataToken,
-      encryptKey: YourEncryptKey,
-      );
-   ```
+    ```dart
+       MDInit.initialize(
+        apiToken: YourApiToken,
+        dataToken: YourDataToken,
+       encryptKey: YourEncryptKey,
+       );
+    ```
 
 
 
@@ -20,9 +19,14 @@
 
 
 ```dart
-      res = await MDRepo().executeProcedure(
-          procedureName: ApiConstants.loginProcedure,
-          dataToken: ApiConstants.dataToken,
-          columnValues: [emailController.text, passwordController.text]);
-  ```
+res = await MDRepo().executeProcedure(
+procedureName: ApiConstants.loginProcedure,
+dataToken: ApiConstants.dataToken,
+columnValues: [emailController.text, passwordController.text]);
+```
  
+# in pubspec.yaml add this code
+```yaml
+dependencies:
+  md_framework: latest_version
+```
