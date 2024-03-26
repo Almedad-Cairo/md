@@ -5,28 +5,30 @@
   ## Usage 
 # in Main.dart add this code
 <?code-excerpt "readme_excerpts.dart (Example)"?>
-    ```dart
+   ```dart
        MDInit.initialize(
         apiToken: YourApiToken,
         dataToken: YourDataToken,
-       encryptKey: YourEncryptKey,
+      encryptKey: YourEncryptKey,
        );
-    ```
+```
 
 
 
 ## Example 
 
 
-    ```dart
+```dart
       res = await MDRepo().executeProcedure(
           procedureName: ApiConstants.loginProcedure,
           dataToken: ApiConstants.dataToken,
           columnValues: [emailController.text, passwordController.text]);
-     ```
- 
-# in pubspec.yaml add this code
+  ```
+
+## Installation
 ```yaml
 dependencies:
   md_framework: latest_version
 ```
+
+ 
