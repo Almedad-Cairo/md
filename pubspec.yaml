@@ -1,6 +1,6 @@
 name: md_framework
 description: "This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework."
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/Almedad-Cairo/md.git
 
 environment:
@@ -28,6 +28,7 @@ dependencies:
   flutter_image_compress: ^2.1.0
   path_provider: ^2.1.2
   encrypt: ^5.0.3
+  mockito: ^5.4.4
 
 
 

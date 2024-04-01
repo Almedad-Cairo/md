@@ -107,22 +107,29 @@ class MDRepo {
     }
   }
 
-  uploadFile(
-      {required WantedAction wantedAction,
-      required var image,
-      String mainID = "0",
-      String subID = "0",
-      String detailID = "0",
-      required String fileType,
-      String fileID = "",
-      String description = "",
-      String name = "",
-      String? dataToken}) async {
+  uploadFile({required WantedAction wantedAction,
+    required var image,
+    String mainID = "0",
+    String subID = "0",
+    String detailID = "0",
+    required String fileType,
+    String fileID = "",
+    String description = "",
+    String name = "",
+    String? dataToken}) async {
     try {
-      final bytes = await FlutterImageCompress.compressWithFile(
-        image.path,
-        quality: 50,
-      );
+      // if file is image compress it
+     late  final bytes;
+      if (fileType == ".png" || fileType == ".jpg" || fileType == ".jpeg") {
+        bytes = await FlutterImageCompress.compressWithFile(
+          image.path,
+          quality: 50,
+        );
+      } else {
+        // pdf file read as bytes
+        bytes = await image.readAsBytes();
+      }
+      debugPrint('bytes: ${bytes == null ? 'null' : 'not null'}');
       final imageBase64 = await compute(encodeImage, bytes);
       var data = await UploadFileModel(
         wantedAction: wantedAction,
