@@ -29,6 +29,16 @@
 ## 0.0.9
 - ADD MDViewer SaveFile fix issue
 
+## 0.1.0
+- Start in notification
+- finish otp
+
+## 0.1.1
+- add notification
+
+## 0.1.2
+- add notification state
+
 
 
 

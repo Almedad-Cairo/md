@@ -88,6 +88,36 @@ action: WantedAction.insert,
 - fileType: The file extension of the file you want to upload.
 - wantedAction: The action you want to perform on the file. It can be insert, update, or delete.
 - The response is returned as an MDResponse object.
+
+### 5. sendOtp
+
+```dart
+      MDResponse res = await _mdRepo.sendOtp(
+    functionName: sendOtpFunction,
+        procedureName: checkOtpProcedure,
+          otpType: OtpType.email,
+            parametersValues: [0, email],
+              to: email);
+  ```
+- functionName: The name of the function you want to call before send otp given from backend.
+- procedureName: The name of the procedure you want to call after send otp given from backend.
+-  otpType: The type of otp you want to send. It can be email or phone.
+- parametersValues: A list of parameters you want to pass to the procedure. The first parameter is 0 for validation and 1 for resetPassword.
+- to: The email or phone number you want to send the otp to.
+- The response is returned as an MDResponse object has a otpToken for use in verifyOtp function.
+
+### 6. verifyOtp
+
+```dart
+       MDResponse res = await _mdRepo.verifyOtp(
+            otpToken: token,
+                  otp: otp);
+  ```
+- otpToken: The otp token you received from the sendOtp function.
+- otp: The otp you want to verify.
+- The response is returned as an MDResponse object.
+- The response has a status of 200 if the otp is verified successfully.
+
 ## Installation
 ```yaml
 dependencies:

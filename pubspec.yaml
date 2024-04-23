@@ -1,6 +1,6 @@
 name: md_framework
 description: "This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework."
-version: 0.0.9
+version: 0.1.2
 homepage: https://github.com/Almedad-Cairo/md.git
 
 environment:
@@ -29,6 +29,8 @@ dependencies:
   path_provider: ^2.1.2
   encrypt: ^5.0.3
   mockito: ^5.4.4
+#  device_info: ^2.0.3
+
 
 
 
@@ -37,7 +39,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 
-# For information on the generic Dart part of this file, see the
+# For information on the generic Dart part of this files, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.

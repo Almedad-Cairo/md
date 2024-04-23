@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 
-import '../../encryption.dart';
-import 'wanted_action.dart';
+import '../../../helper/encryption.dart';
+import '../enums/enums.dart';
 
 class DoMultiTransactionModel {
   late final String dataToken;

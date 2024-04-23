@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import '../../../../md_framework.dart';
-import '../../../api_constants.dart';
-import '../../encryption.dart';
+import '../../../../../md_framework.dart';
+import '../../../../api_constants.dart';
+import '../../../helper/encryption.dart';
 
 class DownloadFileModel {
   late String? fileId, dataToken;

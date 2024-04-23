@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../encryption.dart';
+import '../../../helper/encryption.dart';
 
 part 'md_response_model.g.dart';
 
@@ -11,7 +11,7 @@ class MDResponse {
   @JsonKey(name: 'Error')
   late String message;
   @JsonKey(name: 'Data')
-  String? data;
+  dynamic data;
   @JsonKey(name: 'FileId')
   String? fileID;
   @JsonKey(name: 'SavedFileName')
@@ -20,8 +20,11 @@ class MDResponse {
   String? file64;
   @JsonKey(name: 'FileExt')
   String? fileExtension;
+  @JsonKey(name: 'TransToken')
+  String? otpToken;
 
   MDResponse();
+
   MDResponse.a(
       {required this.status,
       required this.message,
@@ -35,11 +38,9 @@ class MDResponse {
       _$MDResponseFromJson(json);
 
   Future<MDResponse> decryptData() async {
-    status = await decrypt(str: status);
+    status = (await decrypt(str: status)).toString();
     message = await decrypt(str: message);
-    data = (data != '' && data != null)
-        ? await decrypt(str: data!.replaceAll("\r\n", ""))
-        : '';
+    data = (data != '' && data != null) ? await decrypt(str: data!) : '';
     fileExtension = (fileExtension != '' && fileExtension != null)
         ? await decrypt(str: fileExtension!)
         : '';
@@ -48,6 +49,8 @@ class MDResponse {
         : '';
     fileID =
         (fileID != '' && fileID != null) ? await decrypt(str: fileID!) : '';
+
+
     return this;
   }
 }

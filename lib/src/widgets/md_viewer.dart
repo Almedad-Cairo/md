@@ -54,11 +54,11 @@ class _MDViewerState extends State<MDViewer> {
     // Retrieve a list of all files in the directory
     List<FileSystemEntity> fileList = dir.listSync();
 
-    // Iterate through the files and check if any match the desired file name
+    // Iterate through the files and check if any match the desired files name
     String? fileId = widget.fileId;
     File? file;
     for (FileSystemEntity entity in fileList) {
-      // Check if the file name matches without relying on extension
+      // Check if the files name matches without relying on extension
       if (entity is File && entity.path.contains("/$fileId.")) {
         file = File(entity.path);
         break;
@@ -96,7 +96,7 @@ class _MDViewerState extends State<MDViewer> {
 
 
           });
-          debugPrint('file path: $path/${file.path.split('/').last}');
+          debugPrint('files path: $path/${file.path.split('/').last}');
         }
       },
       child: Container(

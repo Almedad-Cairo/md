@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../api_constants.dart';
-import '../md/data/models/md_request_model.dart';
-import '../md/data/models/md_response_model.dart';
+import '../md/data/models/request/md_request_model.dart';
+import '../md/data/models/response/md_response_model.dart';
 
 part 'api_service.g.dart';
 
@@ -35,8 +35,16 @@ abstract class ApiService {
   Future<MDResponse> downloadFile(
     @Body() MDRequest mdRequest,
   );
+  @POST(ApiConstants.sendOtp)
+  Future<MDResponse> sendOTP(
+    @Body() MDRequest mdRequest,
+  );
 
-  //make a function with new url = https://fcm.googleapis.com/fcm/send push notification
+  @POST(ApiConstants.verifyOtp)
+  Future<MDResponse> verifyOTP(
+    @Body() MDRequest mdRequest,
+  );
+
   @POST(ApiConstants.sendNotification)
   Future sendNotification(
       @Body() Map<String, dynamic> data,

@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart' as m;
 
-import '../../md_framework.dart';
-import '../api_constants.dart';
+import '../../../md_framework.dart';
+import '../../api_constants.dart';
 
 Future<String> encrypt({required String str, String? key}) async {
   key = key ?? MD<ApiConstants>().encryptKey;
@@ -48,7 +48,7 @@ Future<String> encrypt({required String str, String? key}) async {
 }
 
 decrypt({String? key, required String str}) async {
-  String encrypted = str.replaceAll("\\r\\n", "");
+  String encrypted = str.replaceAll(RegExp(r'\s+'), '');
   key = key ?? MD<ApiConstants>().encryptKey;
   try {
     m.debugPrint("str: $encrypted");
@@ -83,6 +83,15 @@ decrypt({String? key, required String str}) async {
     final decrypted = encrypter.decrypt(Encrypted.from64(encrypted),
         iv: IV(Uint8List.fromList(iv)));
     m.debugPrint("decrypted: $decrypted");
+    // try {
+    //   var json = jsonDecode(decrypted);
+    //   return json;
+    // } catch (e) {
+    //   return decrypted;
+    // }
+
+
+
     return decrypted;
   } catch (e) {
     m.debugPrint("error: $e");

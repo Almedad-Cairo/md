@@ -5,19 +5,21 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get_it/get_it.dart';
+import 'package:md_framework/src/md/data/models/notifications/md_notification.dart';
+import 'package:md_framework/src/md/data/models/otp/send_otp_model.dart';
 import 'package:md_framework/src/network/api_error_handler.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../../md_framework.dart';
 import '../../../api_constants.dart';
 import '../../../network/api_service.dart';
-import '../../../network/dio_factory.dart';
-import '../models/do_multitransction_model.dart';
-import '../models/do_transction_model.dart';
-import '../models/download_file_model.dart';
-import '../models/execute_procedure_model.dart';
-import '../models/md_request_model.dart';
-import '../models/upload_flie_model.dart';
+import '../models/transactions/do_multitransction_model.dart';
+import '../models/transactions/do_transction_model.dart';
+import '../models/files/download_file_model.dart';
+import '../models/procedures/execute_procedure_model.dart';
+import '../models/request/md_request_model.dart';
+import '../models/files/upload_flie_model.dart';
+import '../models/otp/verify_otp_model.dart';
 
 class MDRepo {
   final ApiService _apiService;
@@ -58,6 +60,7 @@ class MDRepo {
       String? dataToken,
       required List<dynamic> columnValues,
       required WantedAction action,
+      MDNotification? notification,
       List<String> columnsNames = const []}) async {
     try {
       var data = await DoTransactionModel(
@@ -66,6 +69,9 @@ class MDRepo {
         columnValues: columnValues,
         columnsNames: columnsNames,
         action: action,
+        sendNotification: notification != null,
+        notificationProcedure: notification?.procedureName ?? "",
+        notificationParameters: mapNotification(notification),
       ).toMap();
       debugPrint('data: $data');
       MDRequest model = MDRequest(
@@ -106,27 +112,29 @@ class MDRepo {
       rethrow;
     }
   }
+  getSerialNumber()async{
+    // return await DeviceInfo.getSerial();
+  }
 
-  uploadFile({required WantedAction wantedAction,
-    required var image,
-    String mainID = "0",
-    String subID = "0",
-    String detailID = "0",
-    required String fileType,
-    String fileID = "",
-    String description = "",
-    String name = "",
-    String? dataToken}) async {
+  uploadFile(
+      {required WantedAction wantedAction,
+      required var image,
+      String mainID = "0",
+      String subID = "0",
+      String detailID = "0",
+      required String fileType,
+      String fileID = "",
+      String description = "",
+      String name = "",
+      String? dataToken}) async {
     try {
-      // if file is image compress it
-     late  final bytes;
+      final bytes;
       if (fileType == ".png" || fileType == ".jpg" || fileType == ".jpeg") {
         bytes = await FlutterImageCompress.compressWithFile(
           image.path,
           quality: 50,
         );
       } else {
-        // pdf file read as bytes
         bytes = await image.readAsBytes();
       }
       debugPrint('bytes: ${bytes == null ? 'null' : 'not null'}');
@@ -190,26 +198,76 @@ class MDRepo {
     }
   }
 
-  pushNotification(
-      {required String title,
-      required String body,
-      required String token,
-      required Map<String, dynamic> dataa}) async {
-    try {
-      ApiService apiService = ApiService(DioFactory.getDio(),
-          baseUrl: ApiConstants.sendNotificationUrl);
+  // @Deprecated(
+  //     'Push notification is Deprecated, use send notification in doTransaction instead')
+  // pushNotification(
+  //     {required String title,
+  //     required String body,
+  //     required String token,
+  //     required Map<String, dynamic> dataa}) async {
+  //   try {
+  //     ApiService apiService = ApiService(DioFactory.getDio(),
+  //         baseUrl: ApiConstants.sendNotificationUrl);
+  //
+  //     var data = {
+  //       "notification": {
+  //         "title": title,
+  //         "body": body,
+  //       },
+  //       "data": dataa,
+  //       "to": token,
+  //     };
+  //     var res = await apiService.sendNotification(
+  //         data, 'key=${ApiConstants.fcmServerKey}', 'application/json');
+  //     return res;
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
-      var data = {
-        "notification": {
-          "title": title,
-          "body": body,
-        },
-        "data": dataa,
-        "to": token,
-      };
-      var res = await apiService.sendNotification(
-          data, 'key=${ApiConstants.fcmServerKey}', 'application/json');
+  sendOtp(
+      {required String functionName,
+      required String procedureName,
+      required List<dynamic> parametersValues,
+      required String to,
+      required OtpType otpType,
+      String? dataToken}) async {
+    try {
+      var model = await SendOtpModel(
+        functionName: functionName,
+        procedureName: procedureName,
+        parametersValues: parametersValues,
+        otpType: otpType,
+        to: to,
+        dataToken: dataToken ?? MD<ApiConstants>().dataToken,
+      ).toMap();
+      MDRequest mdRequest = MDRequest(data: model);
+      MDResponse resEncrypted = await _apiService.sendOTP(mdRequest);
+      MDResponse res = await resEncrypted.decryptData();
       return res;
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  verifyOtp(
+      {required String otpToken,
+      required String otp,
+      String? dataToken}) async {
+    try {
+      var model = await VerifyOtpModel(
+        otpToken: otpToken,
+        otp: otp,
+        dataToken: dataToken ?? MD<ApiConstants>().dataToken,
+      ).toMap();
+      MDRequest mdRequest = MDRequest(data: model);
+      MDResponse resEncrypted = await _apiService.verifyOTP(mdRequest);
+      MDResponse res = await resEncrypted.decryptData();
+      return res;
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
     } catch (e) {
       rethrow;
     }
