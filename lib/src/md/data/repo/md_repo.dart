@@ -36,6 +36,24 @@ class MDRepo {
       String? dataToken,
       List<dynamic> columnValues = const []}) async {
     try {
+      return await executeProcedure2(
+          procedureName: procedureName,
+          dataToken: dataToken,
+          columnValues: columnValues);
+    } on DioException catch (e) {
+      return ApiErrorHandler.getError(e);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+// try 3 times
+  executeProcedure2(
+      {required String procedureName,
+      String? dataToken,
+      int tryCount = 0,
+      List<dynamic> columnValues = const []}) async {
+    try {
       String data = await ExecuteProcedureModel(
         procedureName: procedureName,
         dataToken: dataToken ?? MD<ApiConstants>().dataToken,
@@ -49,7 +67,17 @@ class MDRepo {
       MDResponse res = await resEncrypted.decryptData();
       return res;
     } on DioException catch (e) {
-      return ApiErrorHandler.getError(e);
+      MDResponse res = ApiErrorHandler.getError(e);
+      debugPrint('tryCount: $tryCount in procedure $procedureName');
+      if (tryCount < 3 && res.status == '408') {
+        tryCount++;
+        return executeProcedure2(
+            procedureName: procedureName,
+            dataToken: dataToken,
+            tryCount: tryCount,
+            columnValues: columnValues);
+      }
+      return res;
     } catch (e) {
       rethrow;
     }
@@ -112,7 +140,8 @@ class MDRepo {
       rethrow;
     }
   }
-  getSerialNumber()async{
+
+  getSerialNumber() async {
     // return await DeviceInfo.getSerial();
   }
 

@@ -39,6 +39,9 @@
 ## 0.1.2
 - add notification state
 
+## 0.1.3
+- Handle network error
+
 
 
 
