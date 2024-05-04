@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:md_framework/md_framework.dart';
 
@@ -11,11 +12,12 @@ class ApiErrorHandler {
       return MDResponse.a(status: '500', message: 'Connection Error');
     } else if (d.response!.statusCode == 404) {
       return MDResponse.a(status: '404', message: 'Not Found');
+    } else if (d.type == DioExceptionType.receiveTimeout) {
+      return MDResponse.a(status: '408', message: 'Connection Timeout');
     } // time out error
     else if (d.response!.statusCode == 408) {
       return MDResponse.a(status: '408', message: 'Connection Timeout');
-    }
-    else {
+    } else {
       return MDResponse.a(status: '500', message: 'Connection Error');
     }
   }

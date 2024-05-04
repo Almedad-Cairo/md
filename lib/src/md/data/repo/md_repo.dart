@@ -69,7 +69,7 @@ class MDRepo {
     } on DioException catch (e) {
       MDResponse res = ApiErrorHandler.getError(e);
       debugPrint('tryCount: $tryCount in procedure $procedureName');
-      if (tryCount < 3 && res.status == '408') {
+      if (tryCount < 3 && (res.status == '408' || res.status == '500')) {
         tryCount++;
         return executeProcedure2(
             procedureName: procedureName,

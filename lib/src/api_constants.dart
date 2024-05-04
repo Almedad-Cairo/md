@@ -17,6 +17,7 @@ class ApiConstants {
   late String encryptKey;
 
   static const String apiBaseUrl =
+  // "http://151.106.34.23:8085/ERPDatabaseWorkFunctions/";
       "https://framework.md-license.com:8093/emsserver.dll/ERPDatabaseWorkFunctions/";
   static const String sendNotificationUrl = "https://fcm.googleapis.com/fcm/";
   static const String sendNotification = "send";

@@ -42,6 +42,9 @@
 ## 0.1.3
 - Handle network error
 
+## 0.1.4
+- Fix  Encrypt/Decrypt Issue
+
 
 
 
