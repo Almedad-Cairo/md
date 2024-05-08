@@ -82,7 +82,7 @@ class MDRepo {
       rethrow;
     }
   }
-
+/// when pass image to upload and need to pass image id in do transaction type (MDImageID)
   doTransaction(
       {required String tableName,
       String? dataToken,

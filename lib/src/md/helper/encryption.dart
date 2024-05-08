@@ -18,7 +18,7 @@ Future<String> encrypt({required String str, String? key}) async {
 }
 
 Future<String> decrypt({required String str, String? key}) async {
-  String encrypted = str.replaceAll(RegExp(r'\s+'), '');
+  String encrypted = str.trim().replaceAll(RegExp(r'\s+'), '').replaceAll("\\r", '').replaceAll("\\n", "");
   key = key ?? MD<ApiConstants>().encryptKey;
   try {
     final encrypter = _buildEncrypter(key);
