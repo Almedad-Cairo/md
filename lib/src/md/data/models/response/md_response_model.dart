@@ -22,6 +22,7 @@ class MDResponse {
   String? fileExtension;
   @JsonKey(name: 'TransToken')
   String? otpToken;
+  String? ServerTime;
 
   MDResponse();
 
@@ -49,6 +50,9 @@ class MDResponse {
         : '';
     fileID =
         (fileID != '' && fileID != null) ? await decrypt(str: fileID!) : '';
+    ServerTime = (ServerTime != '' && ServerTime != null)
+        ? await decrypt(str: ServerTime!)
+        : '';
 
 
     return this;
