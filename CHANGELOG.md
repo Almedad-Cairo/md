@@ -45,6 +45,9 @@
 ## 0.1.4
 - Fix  Encrypt/Decrypt Issue
 
+## 0.1.5
+- add pagination
+
 
 
 

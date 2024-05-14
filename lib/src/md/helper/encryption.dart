@@ -24,6 +24,13 @@ Future<String> decrypt({required String str, String? key}) async {
     final encrypter = _buildEncrypter(key);
     final decrypted = encrypter.decrypt(Encrypted.from64(encrypted),
         iv: IV(Uint8List.fromList(_buildIV(key))));
+    // jsonDecode is used to check if the decrypted string is a valid json
+    // if it is not a valid json, it will throw an exception
+    // try {
+    //   jsonDecode(decrypted);
+    // } catch (e) {
+    //   return decrypted;
+    // }
     return decrypted;
   } catch (e) {
     throw Exception('Decryption error: $e');

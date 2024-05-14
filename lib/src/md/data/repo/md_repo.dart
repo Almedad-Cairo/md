@@ -52,11 +52,15 @@ class MDRepo {
       {required String procedureName,
       String? dataToken,
       int tryCount = 0,
+        String offset = '0',
+        String fetch = '0',
       List<dynamic> columnValues = const []}) async {
     try {
       String data = await ExecuteProcedureModel(
         procedureName: procedureName,
         dataToken: dataToken ?? MD<ApiConstants>().dataToken,
+        offset: offset,
+        fetch: fetch,
         columnValues: columnValues,
       ).toMap();
       MDRequest model = MDRequest(

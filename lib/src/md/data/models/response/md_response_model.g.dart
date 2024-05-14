@@ -15,6 +15,8 @@ MDResponse _$MDResponseFromJson(Map<String, dynamic> json) => MDResponse()
   ..file64 = json['FileData'] as String?
   ..otpToken= json['TransToken'] as String?
   ..ServerTime = json['ServerTime'] as String?
+  ..newID = json['NewId'] as String?
   ..fileExtension = json['FileExt'] as String?;
+
 
 
