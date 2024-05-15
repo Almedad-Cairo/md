@@ -48,6 +48,9 @@
 ## 0.1.5
 - add pagination
 
+## 0.1.6
+- Fix Image Issue
+
 
 
 

@@ -53,7 +53,7 @@ class _MDImageState extends State<MDImage> {
     File file = File("${dir.path}/${widget.fileId}.jpg");
     if (!file.existsSync()) {
       try {
-        file = await MD<MDRepo>().downloadFile(fileId: widget.fileId);
+        file = await MDRepo().downloadFile(fileId: widget.fileId);
       } catch (e) {
         throw Exception('Error downloading file: $e');
       }
@@ -70,6 +70,7 @@ class _MDImageState extends State<MDImage> {
           return widget.loadingWidget ??
               const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
+          // throw Exception('Error downloading file: ${snapshot.error}');
           return widget.errorWidget ??
               Center(child: Text("Error: ${snapshot.error}"));
         } else {

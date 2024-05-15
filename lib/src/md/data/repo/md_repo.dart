@@ -52,8 +52,8 @@ class MDRepo {
       {required String procedureName,
       String? dataToken,
       int tryCount = 0,
-        String offset = '0',
-        String fetch = '0',
+      String offset = '0',
+      String fetch = '0',
       List<dynamic> columnValues = const []}) async {
     try {
       String data = await ExecuteProcedureModel(
@@ -86,7 +86,8 @@ class MDRepo {
       rethrow;
     }
   }
-/// when pass image to upload and need to pass image id in do transaction type (MDImageID)
+
+  /// when pass image to upload and need to pass image id in do transaction type (MDImageID)
   doTransaction(
       {required String tableName,
       String? dataToken,
@@ -285,6 +286,24 @@ class MDRepo {
     }
   }
 
+  handleImage(MDResponse res, String fileId) async {
+    Directory? dir = await getDownloadsDirectory();
+    Directory dir2 = Directory("${dir!.path}/Media");
+    var path = dir2.path;
+    if (!dir2.existsSync()) {
+      dir2.createSync();
+    }
+    debugPrint('path: $path');
+    File file = File("$path/$fileId.${res.fileExtension}");
+
+    // writes with base64 decoding
+    //  var bytes =
+    //  base64Decode(res.file64!.replaceAll(RegExp(r'\s+'), ''));
+    file.writeAsBytesSync(
+        base64Decode(res.file64!.replaceAll(RegExp(r'\s+'), '')));
+    return file;
+  }
+
   verifyOtp(
       {required String otpToken,
       required String otp,
@@ -310,4 +329,19 @@ class MDRepo {
 encodeImage(var bytes) {
   final imageBase64 = base64Encode(bytes);
   return imageBase64;
+}
+
+downloadFile2(Map<String, dynamic> map) async {
+  try {
+    var model = map['model'];
+    var apiService = map['apiService'];
+    MDResponse resEncrypted = await apiService.downloadFile(model);
+    MDResponse res = await resEncrypted.decryptData();
+    return res;
+  } on DioException catch (e) {
+    return ApiErrorHandler.getError(e);
+  } catch (e) {
+    debugPrint('e: $e');
+    return false;
+  }
 }

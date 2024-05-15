@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart'as m;
 
 import '../../../md_framework.dart';
 import '../../api_constants.dart';
@@ -20,6 +21,7 @@ Future<String> encrypt({required String str, String? key}) async {
 Future<String> decrypt({required String str, String? key}) async {
   String encrypted = str.trim().replaceAll(RegExp(r'\s+'), '').replaceAll("\\r", '').replaceAll("\\n", "");
   key = key ?? MD<ApiConstants>().encryptKey;
+  m.debugPrint("key: $key");
   try {
     final encrypter = _buildEncrypter(key);
     final decrypted = encrypter.decrypt(Encrypted.from64(encrypted),
