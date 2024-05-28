@@ -9,7 +9,7 @@ import 'package:md_framework/src/md/data/models/notifications/md_notification.da
 import 'package:md_framework/src/md/data/models/otp/send_otp_model.dart';
 import 'package:md_framework/src/network/api_error_handler.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:flutter/material.dart';
 import '../../../../md_framework.dart';
 import '../../../api_constants.dart';
 import '../../../network/api_service.dart';
@@ -20,6 +20,7 @@ import '../models/procedures/execute_procedure_model.dart';
 import '../models/request/md_request_model.dart';
 import '../models/files/upload_flie_model.dart';
 import '../models/otp/verify_otp_model.dart';
+import 'dart:ui' as ui;
 
 class MDRepo {
   final ApiService _apiService;
@@ -113,6 +114,7 @@ class MDRepo {
       MDResponse resEncrypted = await _apiService.doTransaction(model);
       MDResponse res = await resEncrypted.decryptData();
 
+
       debugPrint('res: ${res.status}');
 
       return res;
@@ -149,7 +151,33 @@ class MDRepo {
   getSerialNumber() async {
     // return await DeviceInfo.getSerial();
   }
+  Future<bool> isImageCorrupted(String imagePath) async {
+    try {
+      // check if file exists
+      bool fileExists = await File(imagePath).exists();
+      if (!fileExists) {
+        // File does not exist
+        return true;
+      }
+      // Read the image file as bytes
+      Uint8List bytes = await File(imagePath).readAsBytes();
 
+      // Attempt to decode the image
+      ui.Image image = await decodeImageFromList(bytes);
+
+      // Check if the image decoding was successful
+      if (image == null) {
+        // Image is corrupted
+        return true;
+      }
+
+      // Image is not corrupted
+      return false;
+    } catch (e) {
+      // An exception occurred during image decoding, indicating corruption
+      return true;
+    }
+  }
   uploadFile(
       {required WantedAction wantedAction,
       required var image,

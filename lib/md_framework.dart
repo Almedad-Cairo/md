@@ -5,4 +5,5 @@ export 'src/md/data/repo/md_repo.dart';
 export 'src/md_initializer.dart';
 export 'src/md/data/models/enums/enums.dart';
 export 'src/md/data/models/notifications/md_notification.dart' hide mapNotification;
+export  'src/md/helper/encryption.dart';
 

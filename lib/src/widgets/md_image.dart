@@ -41,7 +41,35 @@ class _MDImageState extends State<MDImage> {
   @override
   void initState() {
     super.initState();
-    fileFuture = checkImage();
+    fileFuture = fetchFile();
+  }
+
+  Future<File> fetchFile() async {
+    Directory? dir2 = await getDownloadsDirectory();
+    Directory dir = Directory("${dir2!.path}/Media");
+    if (!dir.existsSync()) {
+      dir.createSync();
+    }
+
+    // Retrieve a list of all files in the directory
+    List<FileSystemEntity> fileList = dir.listSync();
+
+    // Iterate through the files and check if any match the desired files name
+    String? fileId = widget.fileId;
+    File? file;
+    for (FileSystemEntity entity in fileList) {
+      // Check if the files name matches without relying on extension
+      if (entity is File && entity.path.contains("/$fileId.")) {
+        file = File(entity.path);
+        break;
+      }
+    }
+
+    file = file ?? await MD<MDRepo>().downloadFile(fileId: fileId);
+    if (file == null) {
+      throw Exception('File not found');
+    }
+    return file;
   }
 
   Future<File> checkImage() async {
@@ -50,16 +78,25 @@ class _MDImageState extends State<MDImage> {
     if (!dir.existsSync()) {
       dir.createSync();
     }
-    File file = File("${dir.path}/${widget.fileId}.jpg");
-    if (!file.existsSync()) {
+    bool value =
+        await MDRepo().isImageCorrupted("${dir.path}/${widget.fileId}.jpg");
+    File file;
+    if (value) {
       try {
+        try {
+          File("${dir.path}/${widget.fileId}.jpg").delete();
+        } catch (_) {}
         file = await MDRepo().downloadFile(fileId: widget.fileId);
+        return file;
       } catch (e) {
         throw Exception('Error downloading file: $e');
       }
+    } else {
+      file = File("${dir.path}/${widget.fileId}.jpg");
+      return file;
     }
-    return file;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +117,16 @@ class _MDImageState extends State<MDImage> {
             decoration: widget.decoration == null
                 ? BoxDecoration(
                     image: DecorationImage(
-                      image: FileImage(snapshot.data!),
+                      image:
+                      FileImage(snapshot.data!),
                       fit: widget.fit,
                       alignment: widget.alignment,
                     ),
                   )
                 : widget.decoration!.copyWith(
                     image: DecorationImage(
-                      image: FileImage(snapshot.data!),
+                      image:
+                      FileImage(snapshot.data!),
                       fit: widget.fit,
                       alignment: widget.alignment,
                     ),

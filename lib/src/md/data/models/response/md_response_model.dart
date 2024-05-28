@@ -28,6 +28,9 @@ class MDResponse {
   String? outParameters;
   String? totalRowsCount;
 
+  String? devError;
+  String? arError;
+
   MDResponse();
 
   MDResponse.a(
@@ -37,6 +40,8 @@ class MDResponse {
       this.fileID,
       this.fileName,
       this.file64,
+      this.devError,
+      this.arError,
       this.fileExtension});
 
   factory MDResponse.fromJson(Map<String, dynamic> json) =>
