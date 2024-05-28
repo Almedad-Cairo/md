@@ -7,6 +7,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get_it/get_it.dart';
 import 'package:md_framework/src/md/data/models/notifications/md_notification.dart';
 import 'package:md_framework/src/md/data/models/otp/send_otp_model.dart';
+import 'package:md_framework/src/md/helper/do_transaction_handler.dart';
 import 'package:md_framework/src/network/api_error_handler.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
@@ -114,10 +115,11 @@ class MDRepo {
       MDResponse resEncrypted = await _apiService.doTransaction(model);
       MDResponse res = await resEncrypted.decryptData();
 
-
       debugPrint('res: ${res.status}');
 
-      return res;
+      return DoTransactionHandler.handle(res);
+
+
     } catch (e) {
       rethrow;
     }
@@ -140,7 +142,8 @@ class MDRepo {
       );
       MDResponse resEncrypted = await _apiService.doMultiTransaction(model);
       MDResponse res = await resEncrypted.decryptData();
-      return res;
+      return DoTransactionHandler.handle(res);
+
     } on DioException catch (e) {
       return ApiErrorHandler.getError(e);
     } catch (e) {
