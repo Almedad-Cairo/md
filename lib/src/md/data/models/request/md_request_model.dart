@@ -6,19 +6,13 @@ class MDRequest {
   late String file;
   String? apiToken;
 
-  MDRequest(
-      {required this.data,
-      this.file = "",
-        this.apiToken
-
-      });
+  MDRequest({required this.data, this.file = "", this.apiToken});
 
   toJson() {
     return {
-      "ApiToken": apiToken??MD<ApiConstants>().apiToken,
+      "ApiToken": apiToken ?? MD<ApiConstants>().apiToken,
       "Data": data,
       "encode_plc1": file,
-
     };
   }
 }

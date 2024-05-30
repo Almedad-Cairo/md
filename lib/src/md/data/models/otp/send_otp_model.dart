@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import '../../../../../md_framework.dart';
-import '../../../helper/encryption.dart';
 
 class SendOtpModel {
   final String functionName, procedureName, to, dataToken;

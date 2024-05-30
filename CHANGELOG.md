@@ -52,5 +52,9 @@
 - Fix Image Issue
 
 
+## 0.1.7
+- DoTransaction Error Handler
+
+
 
 
