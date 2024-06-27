@@ -55,6 +55,12 @@
 ## 0.1.7
 - DoTransaction Error Handler
 
+## 0.1.8
+- DoMultiTransaction Column Names
+
+## 0.1.9
+- handle issue in mdImage
+
 
 
 

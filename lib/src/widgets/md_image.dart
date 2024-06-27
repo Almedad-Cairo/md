@@ -65,7 +65,7 @@ class _MDImageState extends State<MDImage> {
       }
     }
 
-    file = file ?? await MD<MDRepo>().downloadFile(fileId: fileId);
+    file = file ?? await MDRepo().downloadFile(fileId: fileId);
     if (file == null) {
       throw Exception('File not found');
     }
@@ -97,7 +97,6 @@ class _MDImageState extends State<MDImage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<File>(
@@ -110,6 +109,7 @@ class _MDImageState extends State<MDImage> {
           // throw Exception('Error downloading file: ${snapshot.error}');
           return widget.errorWidget ??
               Center(child: Text("Error: ${snapshot.error}"));
+
         } else {
           return Container(
             width: widget.width,
@@ -117,16 +117,14 @@ class _MDImageState extends State<MDImage> {
             decoration: widget.decoration == null
                 ? BoxDecoration(
                     image: DecorationImage(
-                      image:
-                      FileImage(snapshot.data!),
+                      image: FileImage(snapshot.data!),
                       fit: widget.fit,
                       alignment: widget.alignment,
                     ),
                   )
                 : widget.decoration!.copyWith(
                     image: DecorationImage(
-                      image:
-                      FileImage(snapshot.data!),
+                      image: FileImage(snapshot.data!),
                       fit: widget.fit,
                       alignment: widget.alignment,
                     ),

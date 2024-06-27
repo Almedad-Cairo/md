@@ -118,8 +118,6 @@ class MDRepo {
       debugPrint('res: ${res.status}');
 
       return DoTransactionHandler.handle(res);
-
-
     } catch (e) {
       rethrow;
     }
@@ -129,12 +127,14 @@ class MDRepo {
       {required List<String> tableNames,
       required dataToken,
       required List<List<dynamic>> columnValues,
+      List<List<String>> columnsNames = const [],
       required WantedAction action}) async {
     try {
       var data = await DoMultiTransactionModel(
         tableNames: tableNames,
         dataToken: dataToken,
         columnsValues: columnValues,
+        columnsNames: columnsNames,
         action: action,
       ).toMap();
       MDRequest model = MDRequest(
@@ -143,7 +143,6 @@ class MDRepo {
       MDResponse resEncrypted = await _apiService.doMultiTransaction(model);
       MDResponse res = await resEncrypted.decryptData();
       return DoTransactionHandler.handle(res);
-
     } on DioException catch (e) {
       return ApiErrorHandler.getError(e);
     } catch (e) {
@@ -154,6 +153,7 @@ class MDRepo {
   getSerialNumber() async {
     // return await DeviceInfo.getSerial();
   }
+
   Future<bool> isImageCorrupted(String imagePath) async {
     try {
       // check if file exists
@@ -166,7 +166,7 @@ class MDRepo {
       Uint8List bytes = await File(imagePath).readAsBytes();
 
       // Attempt to decode the image
-      ui.Image image = await decodeImageFromList(bytes);
+      ui.Image? image = await decodeImageFromList(bytes);
 
       // Check if the image decoding was successful
       if (image == null) {
@@ -181,6 +181,7 @@ class MDRepo {
       return true;
     }
   }
+
   uploadFile(
       {required WantedAction wantedAction,
       required var image,

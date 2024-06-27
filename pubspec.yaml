@@ -1,6 +1,6 @@
 name: md_framework
 description: "This is a software development kit for the MDFramework. It is a collection of tools and libraries that can be used to develop applications for the MDFramework."
-version: 0.1.7
+version: 0.1.9
 homepage: https://github.com/Almedad-Cairo/md.git
 
 environment:
