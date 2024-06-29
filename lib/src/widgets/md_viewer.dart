@@ -65,7 +65,7 @@ class _MDViewerState extends State<MDViewer> {
       }
     }
 
-    file = file ?? await MD<MDRepo>().downloadFile(fileId: fileId);
+    file = file ?? await MDRepo().downloadFile(fileId: fileId);
     if (file == null) {
       throw Exception('File not found');
     }
