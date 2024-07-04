@@ -37,6 +37,15 @@ class _MDImageBuilderState extends State<MDImageBuilder> {
     super.initState();
     fileFuture = fetchFile();
   }
+  @override
+  void didUpdateWidget(MDImageBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.fileId != oldWidget.fileId) {
+      setState(() {
+        fileFuture = fetchFile();
+      });
+    }
+  }
 
   Future<File> fetchFile() async {
     Directory? dir2 = await getDownloadsDirectory();
