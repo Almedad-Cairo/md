@@ -40,25 +40,25 @@ class DoTransactionHandler {
         return res;
       case "207":
         res.devError = res.message;
-        res.message = res.devError!.split("For Table users , Column email")[0];
+        res.message = " ${res.devError!.split("The Value")[1].split("Is Repeated")[0]} is already exist";
         res.arError =
             "  موجود من قبل${res.devError!.split("The Value")[1].split("Is Repeated")[0]}";
         return res;
       case "208":
         res.devError = res.message;
-        res.message = res.devError!.split("the column ")[0];
+        res.message = "this ${res.devError!.split("the column ")[0]} is not valid";
         res.arError =
             "لا تتوافق مع الشروط${res.devError!.split("the column ")[0]}هذا";
         return res;
       case "209":
         res.devError = res.message;
-        res.message = res.devError!.split("the column ")[0];
+        res.message = "this ${res.devError!.split("the column ")[0]} is not valid";
         res.arError =
             "لا تتوافق مع الشروط${res.devError!.split("the column ")[0]}هذا";
         return res;
       case "210":
         res.devError = res.message;
-        res.message = res.devError!.split("the column ")[0];
+        res.message = "this ${res.devError!.split("the column ")[0]} is not valid";
         res.arError =
             "لا تتوافق مع القيمة${res.devError!.split("the column ")[0]}هذا";
         return res;
