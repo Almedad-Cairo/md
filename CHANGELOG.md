@@ -65,6 +65,12 @@
 - ADD MDImageBuilder
 
 
+## 0.1.11
+- fix issue 
+
+## 0.1.12
+- fix issue
+
 
 
 

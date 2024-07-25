@@ -6,8 +6,8 @@ import '../../../helper/encryption.dart';
 
 class DoTransactionModel {
   late final String tableName, dataToken;
-  late final List<dynamic> columnValues;
-  late final List<String> columnsNames;
+  late  List<dynamic> columnValues;
+  late  List<String> columnsNames;
   late final WantedAction action;
   late bool sendNotification;
   late String notificationProcedure;
@@ -24,6 +24,9 @@ class DoTransactionModel {
       this.notificationParameters = ""});
 
   toMap() async {
+   // remove "#" from columnValues and columnsNames
+    columnValues = columnValues.map((e) => e.toString().replaceAll("#", "")).toList();
+    columnsNames = columnsNames.map((e) => e.replaceAll("#", "")).toList();
     String data = await encrypt(
         str: jsonEncode({
       'TableName': tableName,

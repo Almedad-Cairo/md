@@ -4,7 +4,7 @@ import '../../../../../md_framework.dart';
 
 class SendOtpModel {
   final String functionName, procedureName, to, dataToken;
-  final List<dynamic> parametersValues;
+   List<dynamic> parametersValues;
   final OtpType otpType;
 
   SendOtpModel(
@@ -16,6 +16,7 @@ class SendOtpModel {
       required this.dataToken});
 
   toMap() async {
+    parametersValues.map((e) => e.toString().replaceAll("#", "")).toList();
     String data = await encrypt(
         str: jsonEncode({
       'FunctionName': functionName,

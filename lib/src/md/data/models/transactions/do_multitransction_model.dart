@@ -7,8 +7,8 @@ import '../enums/enums.dart';
 
 class DoMultiTransactionModel {
   late final String dataToken;
-  late final List<List<dynamic>> columnsValues;
-  late final List<List<String>> columnsNames;
+  late  List<List<dynamic>> columnsValues;
+  late  List<List<String>> columnsNames;
 
 
   late final List<String> tableNames;
@@ -24,6 +24,10 @@ class DoMultiTransactionModel {
   });
 
   toMap() async {
+    // remove "#" from columnValues and columnsNames
+    columnsValues = columnsValues.map((e) => e.map((e) => e.toString().replaceAll("#", "")).toList()).toList();
+    columnsNames = columnsNames.map((e) => e.map((e) => e.replaceAll("#", "")).toList()).toList();
+
     var d = columnsValues.map((e) => e.join('#')).toList();
     String columnValues = d.join('^');
     debugPrint('columnValues: $columnValues');

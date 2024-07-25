@@ -6,7 +6,7 @@ import '../../../helper/encryption.dart';
 
 class ExecuteProcedureModel {
   late final String procedureName, dataToken, offset,fetch;
-  late final List<dynamic> columnValues;
+  late  List<dynamic> columnValues;
 
   ExecuteProcedureModel({
     required this.procedureName,
@@ -17,6 +17,7 @@ class ExecuteProcedureModel {
   });
 
   toMap()async {
+    columnValues = columnValues.map((e) => e.toString().replaceAll("#", "")).toList();
     return await  encrypt(
       str: jsonEncode({
         'ProcedureName': procedureName,
